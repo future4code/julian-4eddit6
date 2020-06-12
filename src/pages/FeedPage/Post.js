@@ -1,32 +1,55 @@
 import React, { useState } from "react";
-import styled from "styled-components";
 import { useHistory } from "react-router-dom";
 import { PostContainer } from "./styles"
 import axios from "axios";
 
 export const Post = props => {
+  const [voted, setVoted] = useState(false)
+  const getPosts = props.GetPosts
+
   const history = useHistory()
 
-  const baseUrl = `https://us-central1-labenu-apis.cloudfunctions.net/labEddit/posts/${props.Id}/vote`
-
-  const upVote = () => {
-    const body = {direction: 1}
-
-    axios.put(baseUrl, body, {
+  const vote = body => {
+    axios.put(`https://us-central1-labenu-apis.cloudfunctions.net/labEddit/posts/${props.Id}/vote`, body, {
       headers: {
         Authorization: window.localStorage.getItem('token')
       }
+    }).then(response => {
+      console.log(response)
+      getPosts()
     })
+  }
+
+  const upVote = () => {
+    if (voted === false) {
+      const body = {direction: 1}
+
+      vote(body)
+
+      setVoted(true)
+    } else {
+      const body = {direction: 0}
+
+      vote(body)
+
+      setVoted(false)
+    }
   };
   
   const downVote = () => {
-    const body = {direction: -1}
+    if (voted === false) {
+      const body = {direction: 1}
 
-    axios.put(baseUrl, body, {
-      headers: {
-        Authorization: window.localStorage.getItem('token')
-      }
-    })
+      vote(body)
+
+      setVoted(true)
+    } else {
+      const body = {direction: 0}
+
+      vote(body)
+
+      setVoted(false)
+    }
   };
   
   const goToDetailsPage = () => {

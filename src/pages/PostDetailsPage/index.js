@@ -52,6 +52,7 @@ const PostDetailsPage = () => {
         Text={postDetails.text}
         Votes={postDetails.votesCount}
         Comments={postDetails.commentsCount}
+        GetPostDetail={getPostDetail}
       />
       <form onSubmit={onSubmitComment}>
         <textarea
@@ -70,6 +71,7 @@ const PostDetailsPage = () => {
             Username={comment.username}
             Text={comment.text}
             Votes={comment.votesCount}
+            Id={comment.id}
           />
         );
       })} */}

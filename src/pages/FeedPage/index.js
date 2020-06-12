@@ -20,6 +20,7 @@ const FeedPage = () => {
         Authorization: window.localStorage.getItem('token')
       }
     }).then(response => {
+      console.log(response)
       setPosts(response.data.posts)
     }).catch(error => {
       console.log(error)
@@ -28,7 +29,7 @@ const FeedPage = () => {
 
   useEffect(() => {
     getPosts()
-  })
+  }, [])
 
   const onSubmitPost = event => {
     event.preventDefault()
@@ -70,6 +71,7 @@ const FeedPage = () => {
             Votes={post.votesCount}
             Comments={post.commentsCount}
             Id={post.id}
+            GetPosts={getPosts}
           />
         );
       })}

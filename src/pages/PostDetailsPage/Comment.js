@@ -1,7 +1,52 @@
 import React, { useState } from "react";
 import { CommentContainer } from "./styles";
+import axios from "axios";
+import { useParams } from "react-router-dom";
 
 export const Comment = props => {
+  const [voted, setVoted] = useState(false)
+
+  const params = useParams()
+
+  const voteComment = body => {
+    axios.put(`https://us-central1-labenu-apis.cloudfunctions.net/labEddit/posts/${params.postId}/comment/${props.Id}/vote`, body, {
+      headers: {
+        Authorization: window.localStorage.getItem('token')
+      }
+    })
+  }
+
+  const upVote = () => {
+    if (voted === false) {
+      const body = {direction: 1}
+
+      voteComment(body)
+
+      setVoted(true)
+    } else {
+      const body = {direction: 0}
+
+      voteComment(body)
+
+      setVoted(false)
+    }
+  };
+  
+  const downVote = () => {
+    if (voted === false) {
+      const body = {direction: 1}
+
+      voteComment(body)
+
+      setVoted(true)
+    } else {
+      const body = {direction: 0}
+
+      voteComment(body)
+
+      setVoted(false)
+    }
+  };
 
   return (
     <CommentContainer>
@@ -11,8 +56,8 @@ export const Comment = props => {
       <div className="main">{props.Text}</div>
       <div className="footer">
         <p>
-          <button >+</button> {props.Votes}{" "}
-          <button >-</button>
+          <button onClick={upVote}>+</button> {props.Votes}{" "}
+          <button onClick={downVote}>-</button>
         </p>
       </div>
     </CommentContainer>
