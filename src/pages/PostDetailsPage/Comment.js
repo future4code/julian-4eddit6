@@ -8,11 +8,16 @@ export const Comment = props => {
 
   const params = useParams()
 
+  const getPostDetails = props.GetPostDetails
+
   const voteComment = body => {
     axios.put(`https://us-central1-labenu-apis.cloudfunctions.net/labEddit/posts/${params.postId}/comment/${props.Id}/vote`, body, {
       headers: {
         Authorization: window.localStorage.getItem('token')
       }
+    }).then(response => {
+      console.log(response)
+      getPostDetails()
     })
   }
 

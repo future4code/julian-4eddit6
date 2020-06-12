@@ -52,6 +52,7 @@ const PostDetailsPage = () => {
         Text={postDetails.text}
         Votes={postDetails.votesCount}
         Comments={postDetails.commentsCount}
+        Id={postDetails.id}
         GetPostDetail={getPostDetail}
       />
       <form onSubmit={onSubmitComment}>
@@ -64,17 +65,19 @@ const PostDetailsPage = () => {
         <button type="submit">Enviar</button>
       </form>
       
-      
-      {/* {comments.map(comment => {
-        return (
-          <Comment
-            Username={comment.username}
-            Text={comment.text}
-            Votes={comment.votesCount}
-            Id={comment.id}
-          />
-        );
-      })} */}
+      {postDetails.comments === undefined ? 
+          <p>Carregando...</p> :
+          postDetails.comments.map(comment => {
+          return (
+            <Comment
+              Username={comment.username}
+              Text={comment.text}
+              Votes={comment.votesCount}
+              Id={comment.id}
+              GetPostDetail={getPostDetail}
+            />
+          );
+        })}
     </PostDetailsContainer>
   );
 };
