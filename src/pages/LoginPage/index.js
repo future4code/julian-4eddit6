@@ -46,7 +46,7 @@ const LoginPage = () => {
             />
             <button type="submit">Entrar</button>
             <Link to={'/cadastro'}>
-                <button onClick="">Cadastrar</button>
+                <button>Cadastrar</button>
             </Link>
         </LoginForm>
         

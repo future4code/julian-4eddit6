@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const FeedPageContainer = styled.div`
+export const FeedContainer = styled.div`
   display: grid;
   gap: 32px;
   justify-items: center;
@@ -34,3 +34,9 @@ export const PostContainer = styled.div`
     align-items: center;
   }
 `;
+
+export const PostForm = styled.form`
+    display: grid;
+    gap: 16px;
+    justify-items: center;
+`
