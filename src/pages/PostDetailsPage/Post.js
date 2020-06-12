@@ -1,10 +1,19 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { PostContainer } from "./styles"
+import { PostContainer } from "./styles";
+import upArrowWhite from "../../img/flechabrancacima.png";
+import upArrowBlack from "../../img/flechapretacima.png";
+import downArrowWhite from "../../img/flechabrancabaixo.png";
+import downArrowBlack from "../../img/flechapretabaixo.png";
 
 
 export const Post = props => {
   const [voted, setVoted] = useState(false)
+  const [upVoted, setUpVoted] = useState(false)
+  const [downVoted, setDownVoted] = useState(false)
+  
+  const upVoteIcon = upVoted ? upArrowBlack : upArrowWhite
+  const downVoteIcon = downVoted ? downArrowBlack : downArrowWhite
 
   const getPostDetail = props.GetPostDetail
 
@@ -26,28 +35,32 @@ export const Post = props => {
       vote(body)
 
       setVoted(true)
+      setUpVoted(true)
     } else {
       const body = {direction: 0}
 
       vote(body)
 
       setVoted(false)
+      setUpVoted(false)
     }
   };
   
   const downVote = () => {
     if (voted === false) {
-      const body = {direction: 1}
+      const body = {direction: -1}
 
       vote(body)
 
       setVoted(true)
+      setDownVoted(true)
     } else {
       const body = {direction: 0}
 
       vote(body)
 
       setVoted(false)
+      setDownVoted(false)
     }
   };
 
@@ -59,8 +72,9 @@ export const Post = props => {
       <div className="main">{props.Text}</div>
       <div className="footer">
         <p>
-          <button onClick={upVote}>+</button> {props.Votes}{" "}
-          <button onClick={downVote}>-</button>
+          <img src={upVoteIcon} onClick={upVote}/>
+            {" "}{props.Votes}{" "}
+          <img src={downVoteIcon} onClick={downVote}/>
         </p>
         <p>{props.Comments} comentários</p>
       </div>

@@ -38,7 +38,10 @@ const PostDetailsPage = () => {
       headers: {
         Authorization: window.localStorage.getItem('token')
       }
-    }).then(response => console.log(response)).catch(error => console.log(error))
+    }).then(response => {
+      console.log(response)
+      getPostDetail()
+    })
   }
 
   useEffect(() => {

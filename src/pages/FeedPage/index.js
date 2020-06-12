@@ -3,7 +3,7 @@ import axios from "axios";
 import { Post } from "./Post";
 import { FeedContainer, PostForm } from "./styles";
 import { useForm } from '../../hooks/useForm';
-import {useProtectedPage} from '../../hooks/useProtectedPage'
+import {useProtectedPage} from '../../hooks/useProtectedPage';
 
 const FeedPage = () => {
   const [form, onChangeInput] = useForm({
